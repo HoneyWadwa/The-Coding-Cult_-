@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Your Events</h1>
+    <ul>
+        {% for event in events %}
+        <li>{{ event.event_name }} - {{ event.event_date }} - {{ event.event_venue }}</li>
+        {% endfor %}
+    </ul>
+    {% if current_user.role == 'eventhead' %}
+    <a href="/add_event">Add New Event</a>
+    {% endif %}
+    <a href="/logout">Logout</a>
+</body>
+</html>

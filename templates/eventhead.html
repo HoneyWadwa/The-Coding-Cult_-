@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Event Dashboard">
+    <title>Event Head Dashboard</title>
+    <!-- Bootstrap for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome icons -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/dashboard.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Event Dashboard</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#addEventForm">Add Event</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#eventList">My Events</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Container for adding events -->
+    <div class="container mt-5">
+        <h2 id="addEventForm">Add New Event</h2>
+        <form action="file:///C:/Users/Tejas/OneDrive/Desktop/college_event_app/templates/add_event.html" method="POST" id="eventForm">
+            <div class="mb-3">
+                <label for="eventName" class="form-label">Event Name</label>
+                <input type="text" class="form-control" id="eventName" name="event_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="eventVenue" class="form-label">Venue</label>
+                <input type="text" class="form-control" id="eventVenue" name="event_venue" required>
+            </div>
+            <div class="mb-3">
+                <label for="eventDate" class="form-label">Event Date</label>
+                <input type="date" class="form-control" id="eventDate" name="event_date" required>
+            </div>
+            <div class="mb-3">
+                <label for="eventTime" class="form-label">Event Time</label>
+                <input type="time" class="form-control" id="eventTime" name="event_time" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Event</button>
+        </form>
+    </div>
+
+    <!-- Container to display events -->
+    <div class="container mt-5">
+        <h2 id="eventList">My Events</h2>
+        <div id="eventListContent">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Venue</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Events will be dynamically added here from the server -->
+                    {% for event in events %}
+                    <tr>
+                        <td>{{ event.event_name }}</td>
+                        <td>{{ event.event_venue }}</td>
+                        <td>{{ event.event_date }}</td>
+                        <td>{{ event.event_time }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if not events %}
+            <p>No events available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
