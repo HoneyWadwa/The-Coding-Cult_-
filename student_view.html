@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student View - Event Gallery</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .gallery { display: flex; flex-wrap: wrap; }
+        .item { margin: 10px; }
+        img, video { max-width: 200px; max-height: 200px; }
+    </style>
+</head>
+<body>
+    <h1>Event Gallery - Student View</h1>
+
+    <div class="gallery">
+        {% for image in images %}
+            <div class="item">
+                {% if image.filename.endswith('.mp4') %}
+                    <video controls>
+                        <source src="{{ url_for('static', filename='uploads/' + image.filename) }}" type="video/mp4">
+                    </video>
+                {% else %}
+                    <img src="{{ url_for('static', filename='uploads/' + image.filename) }}" alt="Image">
+                {% endif %}
+                <div>
+                    <h4>Comments:</h4>
+                    <p>{{ image.comment }}</p>
+                    <form method="POST">
+                        <input type="hidden" name="image_id" value="{{ image.id }}">
+                        <input type="text" name="comment" placeholder="Add your comment" required>
+                        <button type="submit">Comment</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
